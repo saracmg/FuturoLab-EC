@@ -1,226 +1,506 @@
-document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------- Barra de progreso de scroll ---------- */
-  const scrollProgress = document.getElementById('scrollProgress');
-  const updateProgress = () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    scrollProgress.style.width = pct + '%';
+"use strict";
+
+/* =========================================================
+   FUTUROLAB EC — INTERACTIVIDAD
+   Vanilla JavaScript | Sin React | Sin MongoDB
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (selector, context = document) => context.querySelector(selector);
+  const $$ = (selector, context = document) =>
+    Array.from(context.querySelectorAll(selector));
+
+  /* =======================================================
+     1. BARRA DE PROGRESO DE LECTURA
+  ======================================================= */
+
+  const scrollProgress = $("#scrollProgress");
+
+  const updateScrollProgress = () => {
+    if (!scrollProgress) return;
+
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress =
+      scrollableHeight > 0
+        ? (window.scrollY / scrollableHeight) * 100
+        : 0;
+
+    scrollProgress.style.width = `${Math.min(100, Math.max(0, progress))}%`;
   };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
 
-  /* ---------- Menú móvil ---------- */
-  const navToggle = document.getElementById('navToggle');
-  const mainNav = document.getElementById('mainNav');
-
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
+  window.addEventListener("scroll", updateScrollProgress, {
+    passive: true
   });
 
-  mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
+  window.addEventListener("resize", updateScrollProgress);
+  updateScrollProgress();
+
+
+  /* =======================================================
+     2. MENÚ RESPONSIVE
+  ======================================================= */
+
+  const navToggle = $("#navToggle");
+  const mainNav = $("#mainNav");
+
+  const closeMenu = () => {
+    if (!navToggle || !mainNav) return;
+
+    mainNav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Abrir menú");
+  };
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Cerrar menú" : "Abrir menú"
+      );
     });
-  });
 
-  /* ---------- Barra de crisis (cerrar) ---------- */
-  const crisisBar = document.getElementById('crisisBar');
-  const crisisClose = document.getElementById('crisisClose');
-  crisisClose.addEventListener('click', () => {
-    crisisBar.classList.add('is-hidden');
-  });
+    $$(".main-nav a", mainNav).forEach(link => {
+      link.addEventListener("click", closeMenu);
+    });
 
-  /* ---------- Resaltar sección activa al hacer scroll ---------- */
-  const sections = document.querySelectorAll('main section[id]');
-  const navLinks = document.querySelectorAll('.main-nav a[data-nav]');
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeMenu();
+    });
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          link.classList.toggle('is-active', link.getAttribute('data-nav') === id);
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 860) closeMenu();
+    });
+  }
+
+
+  /* =======================================================
+     3. BARRA DE AYUDA / CRISIS
+  ======================================================= */
+
+  const crisisBar = $("#crisisBar");
+  const crisisClose = $("#crisisClose");
+
+  if (crisisBar && crisisClose) {
+    crisisClose.addEventListener("click", () => {
+      crisisBar.classList.add("is-hidden");
+    });
+  }
+
+
+  /* =======================================================
+     4. DETECTAR SECCIÓN ACTIVA
+  ======================================================= */
+
+  const sections = $$("main section[id]");
+  const navLinks = $$(".main-nav a[data-nav]");
+
+  if ("IntersectionObserver" in window && sections.length && navLinks.length) {
+    const sectionObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          const currentId = entry.target.id;
+
+          navLinks.forEach(link => {
+            const isActive = link.dataset.nav === currentId;
+
+            link.classList.toggle("is-active", isActive);
+
+            if (isActive) {
+              link.setAttribute("aria-current", "location");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
         });
+      },
+      {
+        rootMargin: "-40% 0px -50% 0px",
+        threshold: 0
       }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    );
 
-  sections.forEach(section => sectionObserver.observe(section));
+    sections.forEach(section => sectionObserver.observe(section));
+  }
 
-  /* ---------- Acordeones (reutilizable) ---------- */
-  document.querySelectorAll('.accordion').forEach(accordion => {
-    const triggers = accordion.querySelectorAll('.accordion-trigger');
+
+  /* =======================================================
+     5. ACORDEONES
+  ======================================================= */
+
+  $$(".accordion").forEach(accordion => {
+    const triggers = $$(".accordion-trigger", accordion);
 
     triggers.forEach(trigger => {
       const panel = trigger.nextElementSibling;
 
-      trigger.addEventListener('click', () => {
-        const isOpen = trigger.classList.contains('is-open');
+      if (!panel) return;
+
+      trigger.setAttribute("aria-expanded", "false");
+
+      trigger.addEventListener("click", () => {
+        const wasOpen = trigger.classList.contains("is-open");
 
         triggers.forEach(otherTrigger => {
-          otherTrigger.classList.remove('is-open');
-          otherTrigger.nextElementSibling.style.maxHeight = null;
+          const otherPanel = otherTrigger.nextElementSibling;
+
+          otherTrigger.classList.remove("is-open");
+          otherTrigger.setAttribute("aria-expanded", "false");
+
+          if (otherPanel) {
+            otherPanel.style.maxHeight = null;
+          }
         });
 
-        if (!isOpen) {
-          trigger.classList.add('is-open');
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+        if (!wasOpen) {
+          trigger.classList.add("is-open");
+          trigger.setAttribute("aria-expanded", "true");
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
         }
       });
     });
   });
 
-  /* ---------- Pestañas (tabs) ---------- */
-  document.querySelectorAll('.tab-group').forEach(group => {
-    const buttons = group.querySelectorAll('.tab-btn');
-    const panels = group.querySelectorAll('.tab-panel');
+
+  /* =======================================================
+     6. PESTAÑAS / TABS
+  ======================================================= */
+
+  $$(".tab-group").forEach(group => {
+    const buttons = $$(".tab-btn", group);
+    const panels = $$(".tab-panel", group);
 
     buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const target = button.getAttribute('data-tab');
-        buttons.forEach(b => b.classList.toggle('is-active', b === button));
-        panels.forEach(p => p.classList.toggle('is-active', p.getAttribute('data-panel') === target));
+      button.addEventListener("click", () => {
+        const target = button.dataset.tab;
+
+        buttons.forEach(item => {
+          const active = item === button;
+
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-selected", String(active));
+        });
+
+        panels.forEach(panel => {
+          const active = panel.dataset.panel === target;
+
+          panel.classList.toggle("is-active", active);
+          panel.hidden = !active;
+        });
       });
     });
   });
 
-  /* ---------- Tarjetas mito/realidad (flip) ---------- */
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('is-flipped');
-    });
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.classList.toggle('is-flipped');
+
+  /* =======================================================
+     7. TARJETAS MITO / REALIDAD
+  ======================================================= */
+
+  $$(".flip-card").forEach(card => {
+    const toggleCard = () => {
+      const flipped = card.classList.toggle("is-flipped");
+
+      card.setAttribute("aria-pressed", String(flipped));
+    };
+
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-pressed", "false");
+
+    card.addEventListener("click", toggleCard);
+
+    card.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleCard();
       }
     });
   });
 
-  /* ---------- Stepper "Cuatro pasos" ---------- */
-  document.querySelectorAll('.stepper').forEach(stepper => {
-    const dots = stepper.querySelectorAll('.stepper-dot');
-    const panels = stepper.querySelectorAll('.stepper-panel');
-    const fill = stepper.querySelector('.stepper-line span');
-    const total = dots.length;
 
-    const goToStep = (stepNum) => {
+  /* =======================================================
+     8. STEPPER — CUATRO PASOS
+  ======================================================= */
+
+  $$(".stepper").forEach(stepper => {
+    const dots = $$(".stepper-dot", stepper);
+    const panels = $$(".stepper-panel", stepper);
+    const fill = $(".stepper-line span", stepper);
+
+    if (!dots.length || !panels.length) return;
+
+    const goToStep = step => {
+      const stepValue = String(step);
+
       dots.forEach(dot => {
-        dot.classList.toggle('is-active', dot.getAttribute('data-step') === String(stepNum));
+        const active = dot.dataset.step === stepValue;
+
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-current", active ? "step" : "false");
       });
+
       panels.forEach(panel => {
-        panel.classList.toggle('is-active', panel.getAttribute('data-panel') === String(stepNum));
+        const active = panel.dataset.panel === stepValue;
+
+        panel.classList.toggle("is-active", active);
+        panel.hidden = !active;
       });
+
       if (fill) {
-        fill.style.width = (stepNum / total) * 100 + '%';
+        const percentage = (Number(step) / dots.length) * 100;
+        fill.style.width = `${percentage}%`;
       }
     };
 
     dots.forEach(dot => {
-      dot.addEventListener('click', () => goToStep(dot.getAttribute('data-step')));
+      dot.addEventListener("click", () => {
+        goToStep(dot.dataset.step);
+      });
     });
 
-    goToStep(1);
+    const firstStep = dots[0].dataset.step || "1";
+    goToStep(firstStep);
   });
 
-  /* ---------- Gráficos de barras animados al entrar en pantalla ---------- */
-  const barCharts = document.querySelectorAll('.bar-chart');
-  const chartObserver = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
-          const value = bar.getAttribute('data-value');
-          bar.style.width = value + '%';
+
+  /* =======================================================
+     9. GRÁFICOS DE BARRAS
+  ======================================================= */
+
+  const barCharts = $$(".bar-chart");
+
+  const animateChart = chart => {
+    $$(".bar-fill", chart).forEach(bar => {
+      const value = Number(bar.dataset.value);
+
+      if (!Number.isFinite(value)) return;
+
+      const safeValue = Math.min(100, Math.max(0, value));
+
+      bar.style.width = `${safeValue}%`;
+    });
+  };
+
+  if ("IntersectionObserver" in window) {
+    const chartObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forforEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          animateChart(entry.target);
+          observer.unobserve(entry.target);
         });
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.35 });
+      },
+      { threshold: 0.25 }
+    );
 
-  barCharts.forEach(chart => chartObserver.observe(chart));
-
-  /* ---------- Carrusel ---------- */
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('carouselPrev');
-  const nextBtn = document.getElementById('carouselNext');
-  const dotsWrap = document.getElementById('carouselDots');
-
-  if (track) {
-    const slides = Array.from(track.children);
-
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
-      if (i === 0) dot.classList.add('is-active');
-      dot.addEventListener('click', () => scrollToSlide(i));
-      dotsWrap.appendChild(dot);
-    });
-
-    const dots = Array.from(dotsWrap.children);
-
-    function scrollToSlide(index) {
-      const slide = slides[index];
-      track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    }
-
-    function currentIndex() {
-      const trackCenter = track.scrollLeft + track.clientWidth / 2;
-      let closest = 0;
-      let closestDist = Infinity;
-      slides.forEach((slide, i) => {
-        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
-        const dist = Math.abs(slideCenter - trackCenter);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      return closest;
-    }
-
-    function updateDots() {
-      const idx = currentIndex();
-      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
-    }
-
-    prevBtn.addEventListener('click', () => scrollToSlide(Math.max(0, currentIndex() - 1)));
-    nextBtn.addEventListener('click', () => scrollToSlide(Math.min(slides.length - 1, currentIndex() + 1)));
-
-    track.addEventListener('scroll', () => {
-      window.clearTimeout(track._scrollTimeout);
-      track._scrollTimeout = window.setTimeout(updateDots, 80);
-    }, { passive: true });
-
-    /* Autoplay suave, se detiene si el usuario interactúa */
-    let autoplay = window.setInterval(() => {
-      const next = (currentIndex() + 1) % slides.length;
-      scrollToSlide(next);
-    }, 4500);
-
-    const stopAutoplay = () => window.clearInterval(autoplay);
-    track.addEventListener('pointerdown', stopAutoplay);
-    prevBtn.addEventListener('click', stopAutoplay);
-    nextBtn.addEventListener('click', stopAutoplay);
+    barCharts.forEach(chart => chartObserver.observe(chart));
+  } else {
+    barCharts.forEach(animateChart);
   }
 
-  /* ---------- Volver arriba ---------- */
-  const backToTop = document.getElementById('backToTop');
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 
+  /* =======================================================
+     10. CARRUSEL
+  ======================================================= */
+
+  const track = $("#carouselTrack");
+  const prevButton = $("#carouselPrev");
+  const nextButton = $("#carouselNext");
+  const dotsContainer = $("#carouselDots");
+
+  if (track) {
+    const slides = Array.from(track.children).filter(slide =>
+      slide.classList.contains("slide")
+    );
+
+    if (slides.length) {
+      let autoplay = null;
+      let currentSlide = 0;
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      const scrollToSlide = index => {
+        currentSlide = Math.max(0, Math.min(slides.length - 1, index));
+
+        const slide = slides[currentSlide];
+
+        track.scrollTo({
+          left: slide.offsetLeft - track.offsetLeft,
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+
+        updateDots();
+      };
+
+      const updateDots = () => {
+        if (!dotsContainer) return;
+
+        Array.from(dotsContainer.children).forEach((dot, index) => {
+          const active = index === currentSlide;
+
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-current", active ? "true" : "false");
+        });
+      };
+
+      if (dotsContainer) {
+        dotsContainer.innerHTML = "";
+
+        slides.forEach((_, index) => {
+          const dot = document.createElement("button");
+
+          dot.type = "button";
+          dot.setAttribute(
+            "aria-label",
+            `Ir a la diapositiva ${index + 1}`
+          );
+
+          dot.addEventListener("click", () => {
+            stopAutoplay();
+            scrollToSlide(index);
+          });
+
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      const getCurrentSlide = () => {
+        const center = track.scrollLeft + track.clientWidth / 2;
+
+        let closestIndex = 0;
+        let smallestDistance = Infinity;
+
+        slides.forEach((slide, index) => {
+          const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+          const distance = Math.abs(slideCenter - center);
+
+          if (distance < smallestDistance) {
+            smallestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        return closestIndex;
+      };
+
+      const stopAutoplay = () => {
+        if (autoplay) {
+          window.clearInterval(autoplay);
+          autoplay = null;
+        }
+      };
+
+      const startAutoplay = () => {
+        stopAutoplay();
+
+        if (prefersReducedMotion || slides.length <= 1) return;
+
+        autoplay = window.setInterval(() => {
+          const nextIndex = (getCurrentSlide() + 1) % slides.length;
+          scrollToSlide(nextIndex);
+        }, 5000);
+      };
+
+      if (prevButton) {
+        prevButton.addEventListener("click", () => {
+          stopAutoplay();
+          scrollToSlide(getCurrentSlide() - 1);
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener("click", () => {
+          stopAutoplay();
+          scrollToSlide(getCurrentSlide() + 1);
+        });
+      }
+
+      track.addEventListener(
+        "scroll",
+        () => {
+          currentSlide = getCurrentSlide();
+          updateDots();
+        },
+        { passive: true }
+      );
+
+      track.addEventListener("mouseenter", stopAutoplay);
+      track.addEventListener("mouseleave", startAutoplay);
+      track.addEventListener("focusin", stopAutoplay);
+      track.addEventListener("focusout", startAutoplay);
+      track.addEventListener("touchstart", stopAutoplay, { passive: true });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopAutoplay();
+        } else {
+          startAutoplay();
+        }
+      });
+
+      updateDots();
+      startAutoplay();
+    }
+  }
+
+
+  /* =======================================================
+     11. BOTÓN VOLVER ARRIBA
+  ======================================================= */
+
+  const backToTop = $("#backToTop");
+
+  if (backToTop) {
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth"
+      });
+    });
+  }
+
+
+  /* =======================================================
+     12. AÑO AUTOMÁTICO
+     Añade id="currentYear" en el footer si quieres usarlo.
+  ======================================================= */
+
+  const currentYear = $("#currentYear");
+
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
+
+  /* =======================================================
+     13. ESTADO DE CARGA
+  ===================================================== */
+
+  document.documentElement.classList.add("js-ready");
+
+  console.info("FuturoLab EC: interactividad cargada correctamente.");
 });
-import React from "react";
-import { createRoot } from "react-dom/client";
 
-import App from "./App.jsx";
-import "./styles.css";
+const chartObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+      animateChart(entry.target);
+      observer.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.25 }
 );
