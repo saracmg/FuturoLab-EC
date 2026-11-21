@@ -1,4 +1,3 @@
-todo lo que tengas en src/App.jsx por lo siguiente:
 import { useEffect, useState } from "react";
 
 constnavigation = [
@@ -47,7 +46,7 @@ constmodules = [
   },
 ];
 
-const myths = [
+myths = [
   {
     myth: "Hablar de sexualidad adelanta el inicio de las relaciones sexuales.",
     reality:
@@ -70,7 +69,7 @@ const myths = [
   },
 ];
 
-const preventionSteps = [
+preventionSteps = [
   {
     title: "Reconocer",
     icon: "01",
@@ -101,7 +100,7 @@ const preventionSteps = [
   },
 ];
 
-const accordionContent = [
+accordionContent = [
   {
     title: "Educación y autonomía",
     text:
@@ -136,17 +135,17 @@ functionSectionHeading({ number, eyebrow, title, description }) {
 }
 
 functionApp() {
-  const[menuOpen, setMenuOpen] = useState(false);
+  [menuOpen, setMenuOpen] = useState(false);
 
-  const[progress, setProgress] = useState(0);
+  [progress, setProgress] = useState(0);
 
-  const[activeMyth, setActiveMyth] = useState(null);
+  [activeMyth, setActiveMyth] = useState(null);
 
-  const[activeStep, setActiveStep] = useState(0);
+  [activeStep, setActiveStep] = useState(0);
 
-  const[activeAccordion, setActiveAccordion] = useState(0);
+  [activeAccordion, setActiveAccordion] = useState(0);
 
-  const[feedback, setFeedback] = useState({
+  [feedback, setFeedback] = useState({
     name: "",
     topic: "Experiencia general",
     rating: "5",
@@ -154,7 +153,7 @@ functionApp() {
     consent: false,
   });
 
-  const [feedbackStatus, setFeedbackStatus] = useState({
+  [, setFeedbackStatus] = useState({
     type: "",
     message: "",
   });
@@ -185,8 +184,8 @@ functionApp() {
   }, []);
 
   // Actualizar campos del formulario
-  function handleFeedbackChange(event) {
-    const { name, value, checked, type } = event.target;
+  handleFeedbackChange(event) {
+  { name, value, checked, type }= event.target;
 
     setFeedback((previous) => ({
       ...previous,
@@ -195,7 +194,7 @@ functionApp() {
   }
 
   // Enviar opiniones a la API
-  async function handleFeedbackSubmit(event) {
+  asynchandleFeedbackSubmit(event) {
     event.preventDefault();
 
     setFeedbackStatus({
@@ -213,7 +212,7 @@ functionApp() {
     }
 
     try {
-      const response = await fetch("/api/feedback", {
+       response = await fetch("/api/feedback", {
         method: "POST",
 
         headers: {
@@ -223,7 +222,7 @@ functionApp() {
         body: JSON.stringify(feedback),
       });
 
-      const result = await response.json();
+       result = await response.json();
 
       if (!response.ok) {
         throw new Error(
