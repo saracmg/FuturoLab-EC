@@ -1,2005 +1,1056 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <!-- ==================================================
-       FUTUROLAB EC | CONFIGURACIÓN GENERAL
-  =================================================== -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#16B8AD">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111a30">
+  <meta name="description" content="FuturoLab EC: un espacio educativo para adolescentes y jóvenes sobre educación sexual integral, proyecto de vida, prevención de violencias y salud mental.">
   <meta name="author" content="FuturoLab EC">
-
-  <meta name="description" content="FuturoLab EC: espacio educativo para adolescentes y jóvenes sobre Educación Sexual Integral, proyecto de vida, prevención de violencias, salud mental y derechos.">
-
-  <meta name="keywords" content="FuturoLab EC, ESI, Ecuador, adolescencia, proyecto de vida, salud mental, prevención de violencia, educación">
-
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index,follow">
 
   <title>FuturoLab EC | Una tribu sin tabú</title>
 
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Estilos principales -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Configuración de accesibilidad -->
-  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
 
-  <!-- ==================================================
-       BARRA DE PROGRESO
-  =================================================== -->
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <div
-    class="scroll-progress"
-    id="scrollProgress"
-    role="progressbar"
-    aria-label="Progreso de lectura"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    aria-valuenow="0">
-  </div>
+  <div class="scroll-progress" id="scrollProgress"
+       role="progressbar"
+       aria-label="Progreso de lectura"
+       aria-valuemin="0"
+       aria-valuemax="100"
+       aria-valuenow="0"></div>
 
-
-  <!-- ==================================================
-       AVISO DE AYUDA
-  =================================================== -->
-
-  <div
-    class="crisis-bar"
-    id="crisisBar"
-    role="region"
-    aria-label="Aviso de recursos de ayuda">
-
+  <!-- AVISO DE AYUDA -->
+  <aside class="crisis-bar" id="crisisBar" aria-label="Aviso de ayuda">
     <span>¿Necesitas hablar con alguien ahora mismo?</span>
-
     <a href="#recursos">
-      Ver líneas de ayuda →
+      Ver recursos de ayuda <span aria-hidden="true">↗</span>
     </a>
+    <button class="crisis-close" id="crisisClose"
+            type="button" aria-label="Cerrar aviso">×</button>
+  </aside>
 
-    <button
-      class="crisis-close"
-      id="crisisClose"
-      type="button"
-      aria-label="Cerrar aviso">
-      ×
-    </button>
-  </div>
-
-
-  <!-- ==================================================
-       ENCABEZADO Y NAVEGACIÓN
-  =================================================== -->
-
+  <!-- HEADER -->
   <header class="site-header">
+    <div class="header-inner container">
 
-    <div class="header-inner">
-
-      <a href="#inicio" class="brand" aria-label="FuturoLab EC, inicio">
-
+      <a class="brand" href="#inicio" aria-label="FuturoLab EC, ir al inicio">
         <span class="brand-mark" aria-hidden="true">
-
-          <svg viewBox="0 0 44 44" width="36" height="36">
-            <defs>
-              <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="var(--turquoise-500)"/>
-                <stop offset="1" stop-color="var(--purple-500)"/>
-              </linearGradient>
-            </defs>
-
-            <polygon
-              points="22,3 39,12.5 39,31.5 22,41 5,31.5 5,12.5"
-              fill="url(#logoGrad)"/>
-
-            <circle
-              cx="22"
-              cy="22"
-              r="7"
-              fill="var(--paper)"/>
+          <svg viewBox="0 0 48 48">
+            <path d="M24 3 43 14v20L24 45 5 34V14L24 3Z"
+                  fill="currentColor"/>
+            <circle cx="24" cy="24" r="7" fill="#111a30"/>
           </svg>
-
         </span>
-
-        <span class="brand-text">
-          Futuro<em>Lab</em> EC
-        </span>
-
+        <span class="brand-text">Futuro<span>Lab</span> EC</span>
       </a>
 
-
-      <button
-        class="nav-toggle"
-        id="navToggle"
-        type="button"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="mainNav">
-
-        <span></span>
-        <span></span>
-        <span></span>
-
+      <button class="nav-toggle" id="navToggle"
+              type="button" aria-label="Abrir menú"
+              aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
       </button>
 
-
-      <nav
-        class="main-nav"
-        id="mainNav"
-        aria-label="Navegación principal">
-
-        <a href="#esi" data-nav="esi">
-          01 ESI &amp; proyecto de vida
+      <nav class="main-nav" id="mainNav"
+           aria-label="Navegación principal">
+        <a href="#esi" data-nav="esi">01 <span>ESI y proyecto de vida</span></a>
+        <a href="#violencia" data-nav="violencia">02 <span>Prevención y violencia</span></a>
+        <a href="#salud-mental" data-nav="salud-mental">03 <span>Salud mental</span></a>
+        <a href="#transversal" data-nav="transversal">04 <span>Enfoque integral</span></a>
+        <a class="nav-help" href="#recursos" data-nav="recursos">
+          Recursos de ayuda <span aria-hidden="true">↗</span>
         </a>
-
-        <a href="#violencia" data-nav="violencia">
-          02 Prevención &amp; violencia
-        </a>
-
-        <a href="#salud-mental" data-nav="salud-mental">
-          03 Salud mental
-        </a>
-
-        <a href="#transversal" data-nav="transversal">
-          04 Enfoque integral
-        </a>
-
-        <a href="#recursos" data-nav="recursos" class="nav-help">
-          Recursos de ayuda
-        </a>
-
       </nav>
 
     </div>
-
   </header>
 
+  <main id="contenido">
 
-  <main id="contenido-principal">
-
-
-    <!-- ==================================================
-         PORTADA / HERO
-    =================================================== -->
-
-    <section class="hero" id="inicio">
+    <!-- HERO / PORTADA -->
+    <section class="hero" id="inicio" aria-labelledby="heroTitle">
 
       <div class="hero-orbit" aria-hidden="true">
-
-        <span class="orbit-ring ring-1"></span>
-        <span class="orbit-ring ring-2"></span>
-        <span class="orbit-ring ring-3"></span>
-
-        <span class="orbit-dot dot-a">🧬</span>
-        <span class="orbit-dot dot-b">💬</span>
-        <span class="orbit-dot dot-c">🧭</span>
-        <span class="orbit-dot dot-d">🤝</span>
-
+        <span class="orbit-ring ring-one"></span>
+        <span class="orbit-ring ring-two"></span>
+        <span class="orbit-ring ring-three"></span>
+        <span class="orbit-dot dot-one">🧬</span>
+        <span class="orbit-dot dot-two">💬</span>
+        <span class="orbit-dot dot-three">🧭</span>
+        <span class="orbit-dot dot-four">🤝</span>
       </div>
 
+      <div class="hero-grid container">
 
-      <div class="hero-inner">
+        <div class="hero-copy">
 
-        <p class="eyebrow">
-          Laboratorio de futuro adolescente
-        </p>
+          <span class="hero-label">
+            <span class="label-spark">✳</span>
+            Laboratorio de futuro adolescente
+          </span>
 
-        <h1 class="hero-title">
-          Una tribu<br>
-          <span class="hero-highlight">sin tabú.</span>
-        </h1>
+          <h1 id="heroTitle">
+            Una tribu<br>
+            <span>sin tabú.</span>
+          </h1>
 
-        <p class="hero-lede">
-          FuturoLab EC traduce la evidencia sobre educación
-          sexual integral, prevención de violencias y salud
-          mental adolescente en un espacio claro, sin juicios
-          y sin medias verdades.
+          <p class="hero-lede">
+            FuturoLab EC traduce la evidencia sobre educación sexual integral,
+            prevención de violencias y salud mental adolescente en un espacio
+            claro, sin juicios y sin medias verdades. Aquí investigamos tu
+            presente para construir tu proyecto de vida.
+          </p>
 
-          Aquí investigamos tu presente para construir
-          tu proyecto de vida.
-        </p>
-
-
-        <div class="hero-actions">
-
-          <a href="#modulos" class="btn btn-primary">
-            Entrar al laboratorio
-          </a>
-
-          <a href="#recursos" class="btn btn-ghost">
-            Necesito ayuda ahora
-          </a>
-
-        </div>
-
-
-        <div class="hero-stats">
-
-          <div>
-            <strong>5×</strong>
-            <span>
-              Más eficaz la ESI con enfoque de género,
-              según investigaciones específicas
-            </span>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#laboratorio">
+              Entrar al laboratorio <span aria-hidden="true">↘</span>
+            </a>
+            <a class="button button-outline" href="#recursos">
+              Necesito ayuda ahora
+            </a>
           </div>
 
-          <div>
-            <strong>80%</strong>
-            <span>
-              Dato de referencia sobre revelación de
-              experiencias de abuso en contextos educativos
-            </span>
-          </div>
-
-          <div>
-            <strong>1 / 4</strong>
-            <span>
-              Indicador de referencia sobre síntomas
-              moderados o severos en determinados estudios
-            </span>
+          <div class="hero-facts" aria-label="Principios del laboratorio">
+            <div>
+              <strong>01</strong>
+              <span>Información basada en evidencia</span>
+            </div>
+            <div>
+              <strong>02</strong>
+              <span>Derechos, autonomía y cuidado</span>
+            </div>
+            <div>
+              <strong>03</strong>
+              <span>Un espacio sin juicios</span>
+            </div>
           </div>
 
         </div>
 
-        <p class="fine-note">
-          Las cifras deben interpretarse según la población,
-          el estudio y el año de publicación.
-        </p>
+        <div class="hero-art" aria-hidden="true">
 
+          <div class="art-core">
+            <span>F</span>
+            <small>FUTURO<br>LAB EC</small>
+          </div>
+
+          <div class="art-chip chip-a">🧠 <b>Conocerme</b></div>
+          <div class="art-chip chip-b">🛡️ <b>Cuidarme</b></div>
+          <div class="art-chip chip-c">🌱 <b>Decidir</b></div>
+          <div class="art-chip chip-d">✨ <b>Crecer</b></div>
+
+        </div>
+      </div>
+
+      <div class="hero-bottom container">
+        <span>DESLIZA PARA EXPLORAR</span>
+        <span class="scroll-line"></span>
+        <span>QUITO · ECUADOR</span>
       </div>
 
     </section>
 
-
-    <!-- ==================================================
-         CARRUSEL DE MÓDULOS
-    =================================================== -->
-
-    <section
-      class="carousel-section"
-      id="modulos"
-      aria-labelledby="carouselTitle">
-
-      <p class="carousel-eyebrow" id="carouselTitle">
-        Lo que exploramos en el laboratorio
-      </p>
-
-
-      <div class="carousel" id="carousel">
-
-        <div
-          class="carousel-track"
-          id="carouselTrack"
-          aria-label="Temas de FuturoLab EC">
-
-          <article class="slide">
-
-            <div class="slide-art"
-              style="--c1:var(--turquoise-500);--c2:var(--purple-500)"
-              aria-hidden="true">
-
-              <svg viewBox="0 0 200 160">
-                <path
-                  d="M20 130 C60 40 140 40 180 120"
-                  fill="none"
-                  stroke="url(#g1)"
-                  stroke-width="8"
-                  stroke-linecap="round"/>
-
-                <circle cx="20" cy="130" r="9" fill="var(--purple-500)"/>
-                <circle cx="180" cy="120" r="9" fill="var(--turquoise-500)"/>
-
-                <defs>
-                  <linearGradient id="g1">
-                    <stop offset="0" stop-color="var(--purple-500)"/>
-                    <stop offset="1" stop-color="var(--turquoise-500)"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-
-            </div>
-
-            <h3>Proyecto de vida</h3>
-            <p>Tu ruta, tus decisiones, tus tiempos.</p>
-
-          </article>
-
-
-          <article class="slide">
-
-            <div class="slide-art" aria-hidden="true">
-              <svg viewBox="0 0 200 160">
-                <circle cx="70" cy="70" r="34"
-                  fill="none" stroke="var(--turquoise-500)" stroke-width="7"/>
-                <circle cx="130" cy="90" r="24"
-                  fill="none" stroke="var(--purple-500)" stroke-width="7"/>
-              </svg>
-            </div>
-
-            <h3>ESI con evidencia</h3>
-            <p>Sexualidad integral, no solo biología ni miedo.</p>
-
-          </article>
-
-
-          <article class="slide">
-
-            <div class="slide-art" aria-hidden="true">
-              <svg viewBox="0 0 200 160">
-                <path
-                  d="M100 20 L170 55 V105 C170 140 140 150 100 155 C60 150 30 140 30 105 V55 Z"
-                  fill="none"
-                  stroke="var(--purple-500)"
-                  stroke-width="7"/>
-
-                <path
-                  d="M70 90 L92 112 L135 65"
-                  fill="none"
-                  stroke="var(--turquoise-500)"
-                  stroke-width="8"
-                  stroke-linecap="round"/>
-              </svg>
-            </div>
-
-            <h3>Prevención de violencias</h3>
-            <p>Rutas claras de protección y acompañamiento.</p>
-
-          </article>
-
-
-          <article class="slide">
-
-            <div class="slide-art" aria-hidden="true">
-              <svg viewBox="0 0 200 160">
-                <path
-                  d="M100 130 C60 130 40 100 40 70 C40 40 65 25 100 25 C135 25 160 40 160 70 C160 100 140 130 100 130 Z"
-                  fill="none"
-                  stroke="var(--turquoise-500)"
-                  stroke-width="7"/>
-
-                <path
-                  d="M100 25 V130 M40 70 H160"
-                  stroke="var(--purple-500)"
-                  stroke-width="4"/>
-              </svg>
-            </div>
-
-            <h3>Salud mental</h3>
-            <p>Reconocer lo que sientes también es cuidarte.</p>
-
-          </article>
-
-
-          <article class="slide">
-
-            <div class="slide-art" aria-hidden="true">
-              <svg viewBox="0 0 200 160">
-                <circle cx="100" cy="80" r="55"
-                  fill="none"
-                  stroke="var(--purple-500)"
-                  stroke-width="6"
-                  stroke-dasharray="10 10"/>
-
-                <circle cx="100" cy="80" r="30"
-                  fill="none"
-                  stroke="var(--turquoise-500)"
-                  stroke-width="6"/>
-              </svg>
-            </div>
-
-            <h3>Ciudadanía digital</h3>
-            <p>Tu imagen y tus datos también son tu territorio.</p>
-
-          </article>
-
-
-          <article class="slide">
-
-            <div class="slide-art" aria-hidden="true">
-              <svg viewBox="0 0 200 160">
-                <rect x="35" y="35" width="130" height="95"
-                  rx="14"
-                  fill="none"
-                  stroke="var(--turquoise-500)"
-                  stroke-width="7"/>
-
-                <path d="M35 65 H165"
-                  stroke="var(--purple-500)"
-                  stroke-width="6"/>
-              </svg>
-            </div>
-
-            <h3>Escuela como escudo</h3>
-            <p>Permanecer en las aulas cambia trayectorias.</p>
-
-          </article>
-
-        </div>
-
-
-        <button
-          class="carousel-arrow prev"
-          id="carouselPrev"
-          type="button"
-          aria-label="Diapositiva anterior">
-          ‹
-        </button>
-
-        <button
-          class="carousel-arrow next"
-          id="carouselNext"
-          type="button"
-          aria-label="Diapositiva siguiente">
-          ›
-        </button>
-
-        <div
-          class="carousel-dots"
-          id="carouselDots"
-          aria-label="Seleccionar diapositiva">
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         MÓDULO 01: ESI Y PROYECTO DE VIDA
-    =================================================== -->
-
-    <section class="pillar" id="esi">
-
-      <div class="pillar-head">
-
-        <span class="pillar-num">01</span>
+    <!-- INTRODUCCIÓN -->
+    <section class="intro-strip" aria-label="Qué encontrarás en FuturoLab">
+      <div class="container intro-grid">
 
         <div>
-          <h2>ESI y proyecto de vida</h2>
-
-          <p class="pillar-sub">
-            La sexualidad como parte natural de la vida:
-            no solo biología, no solo riesgo.
-          </p>
+          <span class="eyebrow">NO ES SOLO INFORMACIÓN</span>
+          <h2>Es un lugar para <span>entenderte</span>.</h2>
         </div>
-
-      </div>
-
-
-      <div class="pillar-body">
-
-        <article class="lead-block">
-
-          <p>
-            La <strong>Educación Sexual Integral (ESI)</strong>
-            es un proceso educativo sistemático y planificado
-            que aborda las dimensiones cognitivas, emocionales,
-            físicas y sociales de la sexualidad.
-
-            Su finalidad es fortalecer la salud, el bienestar,
-            la dignidad y la capacidad de tomar decisiones
-            informadas.
-
-            Una educación integral incorpora afectividad,
-            respeto mutuo, equidad de género, consentimiento
-            y derechos humanos.
-          </p>
-
-        </article>
-
-
-        <div class="stat-grid">
-
-          <article class="stat-card">
-            <span class="stat-number">5×</span>
-            <p>
-              La investigación de Haberland encontró una
-              mayor efectividad de los programas que abordan
-              género y poder frente a determinados resultados
-              de salud sexual y reproductiva.
-            </p>
-          </article>
-
-          <article class="stat-card">
-            <span class="stat-number">↓</span>
-            <p>
-              Los programas de ESI de calidad pueden mejorar
-              el conocimiento, las habilidades de negociación
-              y el uso informado de anticonceptivos.
-            </p>
-          </article>
-
-          <article class="stat-card">
-            <span class="stat-number">80%</span>
-            <p>
-              Indicador citado en investigaciones sobre
-              revelación de abuso en contextos escolares.
-              Requiere identificar el estudio original.
-            </p>
-          </article>
-
-        </div>
-
-
-        <!-- MITO O REALIDAD -->
-
-        <div class="module-block">
-
-          <h3 class="module-title">
-            Mito o realidad: descubre la evidencia
-          </h3>
-
-          <p class="module-caption">
-            Voltea cada tarjeta para conocer la respuesta.
-          </p>
-
-
-          <div class="flip-grid">
-
-            <button class="flip-card" type="button"
-              aria-pressed="false">
-
-              <span class="flip-inner">
-
-                <span class="flip-face flip-front">
-                  <span class="flip-tag">Mito</span>
-                  <span>
-                    «Hablar de sexualidad adelanta el inicio
-                    de las relaciones sexuales».
-                  </span>
-                </span>
-
-                <span class="flip-face flip-back">
-                  <span class="flip-tag flip-tag-real">Evidencia</span>
-                  <span>
-                    La ESI de calidad no adelanta el inicio
-                    sexual. Fortalece conocimientos y decisiones
-                    responsables.
-                  </span>
-                </span>
-
-              </span>
-
-            </button>
-
-
-            <button class="flip-card" type="button"
-              aria-pressed="false">
-
-              <span class="flip-inner">
-
-                <span class="flip-face flip-front">
-                  <span class="flip-tag">Mito</span>
-                  <span>
-                    «Un embarazo en una niña de 13 años
-                    es cuestión de descuido».
-                  </span>
-                </span>
-
-                <span class="flip-face flip-back">
-                  <span class="flip-tag flip-tag-real">Evidencia</span>
-                  <span>
-                    El embarazo infantil requiere protección,
-                    atención especializada e investigación
-                    de posibles hechos de violencia sexual.
-                  </span>
-                </span>
-
-              </span>
-
-            </button>
-
-
-            <button class="flip-card" type="button"
-              aria-pressed="false">
-
-              <span class="flip-inner">
-
-                <span class="flip-face flip-front">
-                  <span class="flip-tag">Mito</span>
-                  <span>
-                    «Hablar sobre mi cuerpo y mis límites
-                    significa que algo está mal».
-                  </span>
-                </span>
-
-                <span class="flip-face flip-back">
-                  <span class="flip-tag flip-tag-real">Evidencia</span>
-                  <span>
-                    Reconocer el cuerpo, expresar límites
-                    y pedir ayuda son habilidades protectoras.
-                  </span>
-                </span>
-
-              </span>
-
-            </button>
-
-
-            <button class="flip-card" type="button"
-              aria-pressed="false">
-
-              <span class="flip-inner">
-
-                <span class="flip-face flip-front">
-                  <span class="flip-tag">Mito</span>
-                  <span>
-                    «Pedir ayuda psicológica es una señal
-                    de debilidad».
-                  </span>
-                </span>
-
-                <span class="flip-face flip-back">
-                  <span class="flip-tag flip-tag-real">Evidencia</span>
-                  <span>
-                    Buscar acompañamiento profesional es una
-                    forma de autocuidado y protección.
-                  </span>
-                </span>
-
-              </span>
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROYECTO DE VIDA Y REGIÓN -->
-
-        <div class="two-col">
-
-          <article class="card-soft">
-
-            <h3>¿Qué es el proyecto de vida?</h3>
-
-            <p>
-              Es el conjunto de metas, decisiones y acciones
-              que una persona construye a partir de sus valores,
-              intereses, capacidades y circunstancias.
-            </p>
-
-            <p>
-              No es un camino rígido ni una lista de obligaciones.
-              Puede cambiar con el tiempo y adaptarse a nuevas
-              experiencias, oportunidades y desafíos.
-            </p>
-
-            <p class="callout-quote">
-              En los <strong>Clubes de Adolescentes</strong>
-              se pueden explorar preguntas como
-              <em>«¿quién soy?»</em>,
-              <em>«¿qué quiero construir?»</em> y
-              <em>«¿qué necesito para lograrlo?»</em>.
-            </p>
-
-          </article>
-
-
-          <article class="card-soft">
-
-            <h3>Estrategias en la región</h3>
-
-            <div class="accordion" id="accordionRegion">
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  Ecuador — ENEIS y recursos educativos
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    La Estrategia Nacional de Educación Integral
-                    en Sexualidad busca fortalecer conocimientos,
-                    capacidades y entornos educativos protectores.
-                    Es importante consultar sus documentos oficiales
-                    para identificar sus componentes y vigencia.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  Venezuela — Educación sexual
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    Las iniciativas educativas regionales
-                    incorporan contenidos de sexualidad,
-                    derechos, prevención y toma de decisiones.
-                    Su aplicación depende del marco normativo
-                    y curricular de cada país.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  Perú — Tutoría y orientación educativa
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    La tutoría educativa permite abordar el
-                    bienestar integral, la convivencia,
-                    la prevención de riesgos y el acompañamiento
-                    de las trayectorias escolares.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  Zambia — Educación integral
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    Las experiencias de educación integral
-                    muestran la importancia de la formación
-                    docente, los materiales adecuados y el
-                    acompañamiento institucional.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         MÓDULO 02: PREVENCIÓN DE VIOLENCIAS
-    =================================================== -->
-
-    <section class="pillar pillar-alt" id="violencia">
-
-      <div class="pillar-head">
-
-        <span class="pillar-num">02</span>
-
-        <div>
-          <h2>Prevención de violencias y embarazo infantil</h2>
-
-          <p class="pillar-sub">
-            La protección, la autonomía y los derechos
-            deben estar en el centro.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="pillar-body">
-
-        <div class="alert-box">
-
-          <strong>Dato clave:</strong>
-
-          El embarazo infantil constituye una situación
-          que requiere atención integral, protección
-          especializada y evaluación de posibles hechos
-          de violencia sexual.
-
-          Ninguna niña debe ser culpabilizada ni revictimizada.
-        </div>
-
-
-        <div class="two-col">
-
-          <article class="card-soft">
-
-            <h3>La ruta de atención: cuatro principios</h3>
-
-            <ol class="step-list">
-
-              <li>
-                <strong>Identificar y proteger.</strong>
-                Reconocer posibles señales de violencia
-                y priorizar la seguridad de la niña.
-              </li>
-
-              <li>
-                <strong>Escuchar sin juzgar.</strong>
-                Evitar preguntas culpabilizadoras,
-                presiones o interrogatorios repetitivos.
-              </li>
-
-              <li>
-                <strong>Activar la atención especializada.</strong>
-                Facilitar atención médica, psicológica,
-                social y jurídica según corresponda.
-              </li>
-
-              <li>
-                <strong>Evitar la revictimización.</strong>
-                Respetar la dignidad, privacidad,
-                autonomía progresiva y derechos.
-              </li>
-
-            </ol>
-
-          </article>
-
-
-          <article class="card-soft">
-
-            <h3>La ESI como escudo contra el abuso</h3>
-
-            <p class="module-caption">
-              Habilidades que pueden desarrollarse desde la niñez:
-            </p>
-
-            <ul class="check-list">
-
-              <li>
-                Reconocer y nombrar correctamente las partes
-                del cuerpo.
-              </li>
-
-              <li>
-                Identificar límites personales y expresar
-                incomodidad.
-              </li>
-
-              <li>
-                Diferenciar secretos seguros de situaciones
-                que generan miedo o daño.
-              </li>
-
-              <li>
-                Reconocer personas adultas de confianza
-                y canales de protección.
-              </li>
-
-            </ul>
-
-          </article>
-
-        </div>
-
-
-        <!-- STEPPER -->
-
-        <div class="module-block">
-
-          <h3 class="module-title">
-            Cuatro pasos para prevenir la violencia basada en género
-          </h3>
-
-          <p class="module-caption">
-            Explora las etapas de reconocimiento,
-            reflexión, aprendizaje y acción.
-          </p>
-
-
-          <div class="stepper" id="stepperVBG">
-
-            <div class="stepper-nav">
-
-              <button class="stepper-dot is-active"
-                type="button"
-                data-step="1"
-                aria-label="Paso 1: Visibilizar">
-                <span>1</span>Visibilizar
-              </button>
-
-              <button class="stepper-dot"
-                type="button"
-                data-step="2"
-                aria-label="Paso 2: Reflexionar">
-                <span>2</span>Reflexionar
-              </button>
-
-              <button class="stepper-dot"
-                type="button"
-                data-step="3"
-                aria-label="Paso 3: Saber más">
-                <span>3</span>Saber más
-              </button>
-
-              <button class="stepper-dot"
-                type="button"
-                data-step="4"
-                aria-label="Paso 4: Actuar">
-                <span>4</span>Actuar
-              </button>
-
-            </div>
-
-
-            <div class="stepper-line">
-              <span id="stepperFill"></span>
-            </div>
-
-
-            <div class="stepper-panels">
-
-              <div class="stepper-panel is-active"
-                data-panel="1">
-
-                <h4>01. Visibilizar</h4>
-
-                <p>
-                  Nombrar la violencia y reconocer sus
-                  manifestaciones en la familia, pareja,
-                  escuela y comunidad.
-                </p>
-
-              </div>
-
-
-              <div class="stepper-panel"
-                data-panel="2"
-                hidden>
-
-                <h4>02. Reflexionar</h4>
-
-                <p>
-                  Cuestionar estereotipos, relaciones de poder,
-                  celos, control y comportamientos que
-                  normalizan la violencia.
-                </p>
-
-              </div>
-
-
-              <div class="stepper-panel"
-                data-panel="3"
-                hidden>
-
-                <h4>03. Saber más</h4>
-
-                <p>
-                  Conocer derechos, rutas de protección
-                  y servicios de atención disponibles
-                  en la comunidad.
-                </p>
-
-              </div>
-
-
-              <div class="stepper-panel"
-                data-panel="4"
-                hidden>
-
-                <h4>04. Actuar</h4>
-
-                <p>
-                  Acompañar de forma segura, activar los
-                  mecanismos de protección y apoyar
-                  a quien solicita ayuda.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROGRAMAS -->
-
-        <article class="card-soft">
-
-          <h3>Trabajar con los varones: experiencias educativas</h3>
-
-          <div class="tab-group" id="tabPrograms">
-
-            <div class="tab-nav" role="tablist"
-              aria-label="Programas de prevención">
-
-              <button class="tab-btn is-active"
-                type="button"
-                role="tab"
-                aria-selected="true"
-                data-tab="h">
-                Programa H
-              </button>
-
-              <button class="tab-btn"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-tab="stepping">
-                Stepping Stones
-              </button>
-
-              <button class="tab-btn"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-tab="fourth">
-                Fourth R / PREPARE
-              </button>
-
-            </div>
-
-
-            <div class="tab-panel is-active"
-              data-panel="h"
-              role="tabpanel">
-
-              <h4>Programa H</h4>
-
-              <p>
-                Intervención educativa que trabaja con
-                hombres jóvenes las masculinidades,
-                la equidad de género, las relaciones
-                respetuosas y la corresponsabilidad.
-              </p>
-
-            </div>
-
-
-            <div class="tab-panel"
-              data-panel="stepping"
-              role="tabpanel"
-              hidden>
-
-              <h4>Stepping Stones</h4>
-
-              <p>
-                Programa participativo que fortalece
-                la comunicación, las relaciones,
-                las habilidades para la vida y la
-                prevención de violencia e infecciones
-                de transmisión sexual.
-              </p>
-
-            </div>
-
-
-            <div class="tab-panel"
-              data-panel="fourth"
-              role="tabpanel"
-              hidden>
-
-              <h4>Fourth R / PREPARE</h4>
-
-              <p>
-                Experiencias educativas que incorporan
-                relaciones saludables, prevención de
-                violencia en el noviazgo, toma de
-                decisiones y habilidades socioemocionales.
-              </p>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- VIOLENCIA DIGITAL -->
-
-        <article class="card-soft wide-card">
-
-          <h3>Violencia de género digital</h3>
-
-          <p>
-            La violencia digital comprende acciones realizadas
-            mediante tecnologías que provocan daño, intimidación,
-            control o vulneración de derechos.
-          </p>
-
-          <p>
-            Algunas manifestaciones son el ciberacoso,
-            la vigilancia de pareja, la sextorsión,
-            el grooming, la suplantación de identidad
-            y la difusión no consentida de imágenes íntimas.
-          </p>
-
-          <p>
-            La prevención requiere educación digital,
-            protección de datos personales, consentimiento,
-            canales de denuncia y acompañamiento
-            sin culpabilizar a las víctimas.
-          </p>
-
-          <p class="fine-note">
-            Si alguien difunde imágenes íntimas sin
-            consentimiento, no es responsabilidad de
-            quien aparece en ellas. Busca apoyo y
-            conserva evidencias de manera segura.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         MÓDULO 03: SALUD MENTAL
-    =================================================== -->
-
-    <section class="pillar" id="salud-mental">
-
-      <div class="pillar-head">
-
-        <span class="pillar-num">03</span>
-
-        <div>
-          <h2>Salud mental en la adolescencia</h2>
-
-          <p class="pillar-sub">
-            El bienestar emocional también forma parte
-            de tu proyecto de vida.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="pillar-body">
-
-
-        <div class="stat-grid">
-
-          <article class="stat-card">
-            <span class="stat-number">1 de cada 7</span>
-            <p>
-              Adolescentes de 10 a 19 años experimenta
-              algún trastorno mental, según estimaciones
-              de la Organización Mundial de la Salud.
-            </p>
-          </article>
-
-          <article class="stat-card">
-            <span class="stat-number">10–19</span>
-            <p>
-              Etapa de desarrollo en la que la prevención,
-              el acompañamiento y el acceso a servicios
-              de salud mental son fundamentales.
-            </p>
-          </article>
-
-          <article class="stat-card">
-            <span class="stat-number">3.ª</span>
-            <p>
-              El suicidio se encuentra entre las principales
-              causas de muerte en adolescentes mayores,
-              según datos mundiales de la OMS.
-            </p>
-          </article>
-
-        </div>
-
-
-        <article class="lead-block">
-
-          <p>
-            La ansiedad, la depresión y otros problemas
-            emocionales pueden afectar el aprendizaje,
-            las relaciones sociales, el descanso y
-            la percepción de uno mismo.
-
-            Su aparición está relacionada con múltiples
-            factores: experiencias personales, condiciones
-            económicas, violencia, discriminación,
-            vínculos familiares, entorno educativo
-            y acceso a servicios de salud.
-          </p>
-
-        </article>
-
-
-        <!-- GRÁFICO -->
-
-        <div class="module-block">
-
-          <h3 class="module-title">
-            Información sobre salud mental adolescente
-          </h3>
-
-          <p class="module-caption">
-            Los datos estadísticos deben vincularse a una
-            fuente oficial, periodo y metodología antes
-            de utilizarse como indicadores cuantitativos.
-          </p>
-
-          <div class="bar-chart" id="chartEcuador">
-
-            <div class="bar-row">
-
-              <span class="bar-label">
-                Ansiedad
-              </span>
-
-              <div class="bar-track">
-                <div class="bar-fill" data-value="36"></div>
-              </div>
-
-              <span class="bar-value">36%</span>
-
-            </div>
-
-
-            <div class="bar-row">
-
-              <span class="bar-label">
-                Estrés
-              </span>
-
-              <div class="bar-track">
-                <div class="bar-fill" data-value="28"></div>
-              </div>
-
-              <span class="bar-value">28%</span>
-
-            </div>
-
-
-            <div class="bar-row">
-
-              <span class="bar-label">
-                Estado de ánimo
-              </span>
-
-              <div class="bar-track">
-                <div class="bar-fill" data-value="22"></div>
-              </div>
-
-              <span class="bar-value">22%</span>
-
-            </div>
-
-
-            <div class="bar-row">
-
-              <span class="bar-label">
-                Otros factores
-              </span>
-
-              <div class="bar-track">
-                <div class="bar-fill" data-value="14"></div>
-              </div>
-
-              <span class="bar-value">14%</span>
-
-            </div>
-
-          </div>
-
-          <p class="fine-note">
-            Gráfico ilustrativo, no representa estadísticas
-            oficiales de Ecuador ni prevalencias clínicas.
-          </p>
-
-        </div>
-
-
-        <article class="lead-block">
-
-          <p>
-            La salud mental no se explica únicamente
-            desde lo individual. La pobreza, la discriminación,
-            el desarraigo cultural, la violencia y la
-            desigualdad pueden influir en el bienestar
-            psicológico.
-
-            Por eso, la prevención necesita combinar
-            habilidades personales con entornos seguros,
-            redes de apoyo y servicios accesibles.
-          </p>
-
-        </article>
-
-
-        <!-- PREVENCIÓN DEL SUICIDIO -->
-
-        <div class="alert-box alert-box-soft">
-
-          <strong>Hablar sobre salud mental importa.</strong>
-
-          Si tú o alguien cercano atraviesa una crisis,
-          escucha sin juzgar, toma en serio cualquier
-          expresión de sufrimiento y busca ayuda profesional.
-
-          Si existe peligro inmediato o riesgo de autolesión,
-          no dejes sola a la persona y contacta a los
-          servicios de emergencia.
-
-          Preguntar directamente y con empatía por
-          pensamientos suicidas puede facilitar que
-          una persona encuentre apoyo.
-
-          <a href="#recursos">Consulta los recursos de ayuda.</a>
-
-        </div>
-
-
-        <!-- HERRAMIENTAS -->
-
-        <div class="two-col">
-
-          <article class="card-soft">
-
-            <h3>Herramientas de evaluación utilizadas por profesionales</h3>
-
-            <div class="accordion" id="accordionScreen">
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  HEADSSS
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    Entrevista psicosocial que explora hogar,
-                    educación, actividades, sustancias,
-                    sexualidad, suicidio y seguridad.
-                    Permite identificar riesgos y factores
-                    protectores.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  PHQ-9
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    Cuestionario utilizado para evaluar
-                    síntomas depresivos. Su interpretación
-                    debe realizarse con criterios clínicos
-                    y acompañamiento profesional.
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="accordion-item">
-
-                <button class="accordion-trigger"
-                  type="button"
-                  aria-expanded="false">
-                  GAD-7
-                </button>
-
-                <div class="accordion-panel">
-                  <p>
-                    Instrumento de detección de síntomas
-                    de ansiedad. No constituye por sí solo
-                    un diagnóstico.
-                  </p>
-                </div>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="card-soft" id="tca-block">
-
-            <h3>Trastornos de la conducta alimentaria</h3>
-
-            <p>
-              Los trastornos de la conducta alimentaria
-              pueden afectar la salud física y emocional.
-              Incluyen alteraciones persistentes de la
-              alimentación, preocupación intensa por el
-              peso o la figura y conductas que pueden
-              poner en riesgo la salud.
-            </p>
-
-            <p>
-              La anorexia nerviosa, la bulimia y el
-              trastorno por atracón requieren atención
-              especializada y un abordaje interdisciplinario.
-            </p>
-
-            <p>
-              La prevención incluye una relación saludable
-              con la alimentación, el respeto a la diversidad
-              corporal y la reducción del estigma.
-            </p>
-
-            <p class="fine-note">
-              Las herramientas de detección no reemplazan
-              una evaluación médica o psicológica.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         MÓDULO 04: ENFOQUE INTEGRAL
-    =================================================== -->
-
-    <section class="pillar pillar-alt" id="transversal">
-
-      <div class="pillar-head">
-
-        <span class="pillar-num">04</span>
-
-        <div>
-          <h2>Un enfoque integral</h2>
-
-          <p class="pillar-sub">
-            Nadie construye su proyecto de vida en el vacío:
-            el entorno también importa.
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="pillar-body">
-
-
-        <!-- MODELO SOCIOECOLÓGICO -->
-
-        <div class="socio-levels">
-
-          <div class="level-ring">
-
-            <div class="level level-1">
-              <span>Individual</span>
-            </div>
-
-            <div class="level level-2">
-              <span>Familia y pares</span>
-            </div>
-
-            <div class="level level-3">
-              <span>Comunidad e instituciones</span>
-            </div>
-
-            <div class="level level-4">
-              <span>Leyes y estructura social</span>
-            </div>
-
-          </div>
-
-
-          <div class="socio-text">
-
-            <h3>Modelo socioecológico</h3>
-
-            <p>
-              El bienestar adolescente está relacionado
-              con factores que interactúan en distintos
-              niveles:
-            </p>
-
-            <ul class="check-list">
-
-              <li>
-                <strong>Individual:</strong>
-                conocimientos, habilidades y experiencias.
-              </li>
-
-              <li>
-                <strong>Relacional:</strong>
-                familia, amistades y vínculos afectivos.
-              </li>
-
-              <li>
-                <strong>Comunitario:</strong>
-                escuelas, centros de salud y organizaciones.
-              </li>
-
-              <li>
-                <strong>Estructural:</strong>
-                políticas públicas, leyes y condiciones sociales.
-              </li>
-
-            </ul>
-
-            <p>
-              Una prevención efectiva requiere intervenir
-              de manera coordinada en estos niveles.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="two-col">
-
-          <article class="card-soft">
-
-            <h3>Interseccionalidad: nadie parte del mismo punto</h3>
-
-            <p>
-              Las desigualdades pueden combinarse y
-              producir barreras diferentes para cada
-              adolescente.
-            </p>
-
-            <ul class="check-list">
-
-              <li>
-                <strong>Edad:</strong>
-                protección especial de niñas, niños
-                y adolescentes.
-              </li>
-
-              <li>
-                <strong>Pueblos indígenas y afrodescendientes:</strong>
-                servicios cultural y lingüísticamente pertinentes.
-              </li>
-
-              <li>
-                <strong>Población LGBTIQ+:</strong>
-                espacios libres de discriminación.
-              </li>
-
-              <li>
-                <strong>Discapacidad:</strong>
-                accesibilidad en educación, salud y protección.
-              </li>
-
-              <li>
-                <strong>Migración:</strong>
-                atención sin discriminación ni barreras injustificadas.
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <article class="card-soft">
-
-            <h3>Autonomía progresiva y derechos</h3>
-
-            <p>
-              Las personas adolescentes son sujetos de
-              derechos y participan activamente en las
-              decisiones que afectan su vida.
-            </p>
-
-            <p>
-              La autonomía progresiva reconoce que las
-              capacidades para tomar decisiones se
-              desarrollan con la edad, la experiencia
-              y el acompañamiento adecuado.
-            </p>
-
-            <p>
-              Las instituciones deben respetar la privacidad,
-              la dignidad, la participación y el interés
-              superior de niñas, niños y adolescentes.
-            </p>
-
-          </article>
-
-        </div>
-
-
-        <article class="card-soft wide-card">
-
-          <h3>La escuela como escudo protector</h3>
-
-          <p>
-            La educación es un factor fundamental para
-            ampliar oportunidades, fortalecer la autonomía
-            y reducir desigualdades.
-
-            La prevención de la deserción requiere sistemas
-            de alerta temprana, acompañamiento psicosocial,
-            adaptaciones educativas y protocolos que
-            garanticen la continuidad de los estudios.
-          </p>
-
-          <p>
-            Una escuela protectora es aquella que escucha,
-            respeta las diferencias, previene la violencia
-            y construye condiciones reales de permanencia
-            y aprendizaje.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         PRÓXIMO EN EL LABORATORIO
-    =================================================== -->
-
-    <section class="next-lab">
-
-      <div class="next-lab-inner">
-
-        <span class="eyebrow eyebrow-onlight">
-          Próximo experimento
-        </span>
-
-        <h2>
-          Contraloría social: cuando la tribu vigila
-          su propio cuidado
-        </h2>
 
         <p>
-          La participación adolescente en el monitoreo
-          de servicios públicos permite identificar
-          barreras, proponer soluciones y fortalecer
-          la calidad de la atención.
-
-          FuturoLab EC continuará explorando cómo
-          la participación juvenil puede transformar
-          los servicios y las políticas públicas.
+          Preguntar, reconocer límites y buscar apoyo también son habilidades
+          para la vida. Explora a tu ritmo y comparte lo que aprendas con
+          personas de confianza.
         </p>
 
       </div>
-
     </section>
 
+    <!-- LABORATORIO -->
+    <section class="explore section-pad" id="laboratorio"
+             aria-labelledby="exploreTitle">
 
-    <!-- ==================================================
-         RECURSOS DE AYUDA
-    =================================================== -->
+      <div class="container">
 
-    <section class="resources" id="recursos">
+        <div class="section-heading centered">
+          <span class="eyebrow">TU RUTA DE EXPLORACIÓN</span>
+          <h2 id="exploreTitle">Lo que exploramos en el laboratorio</h2>
+          <p>
+            Seis puertas de entrada para comprender tu presente y construir
+            decisiones informadas.
+          </p>
+        </div>
 
-      <div class="resources-inner">
+        <div class="carousel-wrap">
 
-        <h2>
-          Si necesitas hablar con alguien,
-          no tienes que hacerlo a solas.
-        </h2>
+          <button class="carousel-arrow carousel-prev" id="carouselPrev"
+                  type="button" aria-label="Ver tarjeta anterior">‹</button>
 
-        <p class="resources-lede">
-          Pedir ayuda no es un paso atrás en tu proyecto
-          de vida: es parte de él. Buscar apoyo es válido
-          y mereces ser escuchado sin juicios.
+          <div class="carousel-track" id="carouselTrack"
+               tabindex="0" aria-label="Temas del laboratorio">
+
+            <article class="explore-card">
+              <div class="explore-icon icon-teal">🧭</div>
+              <span class="card-index">01 / RUTA</span>
+              <h3>Proyecto de vida</h3>
+              <p>Tu ruta, tus decisiones y tus tiempos. Identifica metas, apoyos y posibilidades.</p>
+              <a href="#esi">Explorar módulo <span>↗</span></a>
+            </article>
+
+            <article class="explore-card">
+              <div class="explore-icon icon-purple">🧬</div>
+              <span class="card-index">02 / CONOCER</span>
+              <h3>ESI con evidencia</h3>
+              <p>Sexualidad integral, consentimiento, autocuidado y derechos, sin mitos ni vergüenza.</p>
+              <a href="#esi">Explorar módulo <span>↗</span></a>
+            </article>
+
+            <article class="explore-card">
+              <div class="explore-icon icon-pink">🛡️</div>
+              <span class="card-index">03 / PROTEGER</span>
+              <h3>Prevención de violencias</h3>
+              <p>Reconoce señales de alerta y conoce rutas para pedir ayuda y protección.</p>
+              <a href="#violencia">Explorar módulo <span>↗</span></a>
+            </article>
+
+            <article class="explore-card">
+              <div class="explore-icon icon-yellow">🧠</div>
+              <span class="card-index">04 / SENTIR</span>
+              <h3>Salud mental</h3>
+              <p>Nombrar emociones, reconocer cambios y encontrar apoyo también es cuidarte.</p>
+              <a href="#salud-mental">Explorar módulo <span>↗</span></a>
+            </article>
+
+            <article class="explore-card">
+              <div class="explore-icon icon-blue">📱</div>
+              <span class="card-index">05 / CONECTAR</span>
+              <h3>Ciudadanía digital</h3>
+              <p>Tu imagen, tus datos, tus límites y tu bienestar también existen en internet.</p>
+              <a href="#transversal">Explorar módulo <span>↗</span></a>
+            </article>
+
+            <article class="explore-card">
+              <div class="explore-icon icon-green">🏫</div>
+              <span class="card-index">06 / ACOMPAÑAR</span>
+              <h3>Escuela protectora</h3>
+              <p>La comunidad educativa puede crear condiciones para aprender y permanecer.</p>
+              <a href="#transversal">Explorar módulo <span>↗</span></a>
+            </article>
+
+          </div>
+
+          <button class="carousel-arrow carousel-next" id="carouselNext"
+                  type="button" aria-label="Ver tarjeta siguiente">›</button>
+
+        </div>
+
+        <div class="carousel-footer">
+          <div class="carousel-dots" id="carouselDots"
+               aria-label="Paginación del carrusel"></div>
+          <span class="carousel-hint">
+            Desliza o utiliza las flechas para explorar
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MÓDULO 01: ESI -->
+    <section class="module module-light section-pad" id="esi"
+             aria-labelledby="esiTitle">
+
+      <div class="container">
+
+        <div class="module-heading">
+          <div class="module-number">01</div>
+          <div>
+            <span class="eyebrow">CONOCERME PARA DECIDIR</span>
+            <h2 id="esiTitle">ESI y proyecto de vida</h2>
+            <p>
+              La sexualidad es parte natural de la vida: no se limita a la
+              biología ni a la prevención de riesgos.
+            </p>
+          </div>
+        </div>
+
+        <div class="content-grid content-grid-two">
+
+          <article class="content-card feature-card">
+            <span class="mini-label">¿QUÉ ES LA ESI?</span>
+            <h3>Una educación que mira a la persona de forma integral.</h3>
+            <p>
+              La Educación Sexual Integral es un proceso educativo sistemático
+              y planificado que aborda dimensiones cognitivas, emocionales,
+              físicas y sociales de la sexualidad. Busca fortalecer la salud,
+              el bienestar, la dignidad y la capacidad de tomar decisiones
+              informadas.
+            </p>
+            <p>
+              Una ESI de calidad incorpora afectividad, respeto mutuo,
+              equidad de género, consentimiento, diversidad y derechos humanos,
+              de acuerdo con la edad y el desarrollo.
+            </p>
+            <div class="quote-note">
+              Aprender sobre sexualidad también es aprender a reconocer tus
+              límites, respetar los de otras personas y pedir información
+              confiable.
+            </div>
+          </article>
+
+          <article class="content-card gradient-card">
+            <span class="mini-label">TU PROYECTO DE VIDA</span>
+            <h3>No necesitas tenerlo todo resuelto hoy.</h3>
+            <p>
+              Un proyecto de vida no es una lista rígida de logros. Puede
+              cambiar con tus experiencias, intereses, vínculos y oportunidades.
+            </p>
+            <ul class="check-list">
+              <li>Reconoce lo que te importa.</li>
+              <li>Identifica habilidades y cosas que quieres aprender.</li>
+              <li>Piensa en metas pequeñas y alcanzables.</li>
+              <li>Ubica personas y espacios que pueden apoyarte.</li>
+              <li>Permítete cambiar de dirección.</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <div class="subsection-heading">
+          <span class="eyebrow">PON A PRUEBA LO QUE SABES</span>
+          <h3>Mito o realidad: descubre la evidencia</h3>
+          <p>Selecciona una tarjeta para revelar la explicación.</p>
+        </div>
+
+        <div class="flip-grid">
+
+          <button class="flip-card" type="button" aria-pressed="false">
+            <span class="flip-inner">
+              <span class="flip-face flip-front">
+                <span class="flip-label">MITO 01</span>
+                <strong>«Hablar de sexualidad adelanta el inicio de las relaciones sexuales».</strong>
+                <small>Toca para descubrir</small>
+              </span>
+              <span class="flip-face flip-back">
+                <span class="flip-label">REALIDAD</span>
+                <strong>La ESI de calidad no busca adelantar decisiones.</strong>
+                <small>Fortalece conocimientos, habilidades para negociar límites y decisiones responsables.</small>
+              </span>
+            </span>
+          </button>
+
+          <button class="flip-card" type="button" aria-pressed="false">
+            <span class="flip-inner">
+              <span class="flip-face flip-front">
+                <span class="flip-label">MITO 02</span>
+                <strong>«Un embarazo infantil es simplemente un descuido».</strong>
+                <small>Toca para descubrir</small>
+              </span>
+              <span class="flip-face flip-back">
+                <span class="flip-label">REALIDAD</span>
+                <strong>Requiere protección y atención especializada.</strong>
+                <small>El embarazo en niñas puede estar asociado a violencia sexual y exige activar rutas de protección, sin culpabilizar a la niña.</small>
+              </span>
+            </span>
+          </button>
+
+          <button class="flip-card" type="button" aria-pressed="false">
+            <span class="flip-inner">
+              <span class="flip-face flip-front">
+                <span class="flip-label">MITO 03</span>
+                <strong>«Poner límites significa desconfiar de todo el mundo».</strong>
+                <small>Toca para descubrir</small>
+              </span>
+              <span class="flip-face flip-back">
+                <span class="flip-label">REALIDAD</span>
+                <strong>Los límites son parte de los vínculos respetuosos.</strong>
+                <small>Puedes decidir qué te hace sentir cómoda o cómodo y cambiar de opinión. El consentimiento debe ser libre y reversible.</small>
+              </span>
+            </span>
+          </button>
+
+        </div>
+
+        <div class="accordion-block">
+
+          <div class="subsection-heading">
+            <span class="eyebrow">APRENDER EN CONTEXTO</span>
+            <h3>¿Qué hace que un programa de ESI sea de calidad?</h3>
+          </div>
+
+          <div class="accordion" data-accordion>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                Enfoque de derechos y género
+                <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Promueve igualdad, dignidad y no discriminación. Analiza cómo
+                  las relaciones de poder y los estereotipos pueden afectar la
+                  autonomía y el acceso a oportunidades.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                Información científica y adecuada a la edad
+                <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Ofrece contenidos claros, progresivos y apropiados para la
+                  etapa de desarrollo. Distingue evidencia, opiniones y mitos,
+                  y evita el miedo como herramienta educativa.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                Habilidades para la vida y participación
+                <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Incluye comunicación, toma de decisiones, pensamiento crítico,
+                  negociación de límites y búsqueda de ayuda. La participación
+                  adolescente debe ser respetuosa y significativa.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MÓDULO 02: PREVENCIÓN DE VIOLENCIAS -->
+    <section class="module module-tint section-pad" id="violencia"
+             aria-labelledby="violenciaTitle">
+
+      <div class="container">
+
+        <div class="module-heading">
+          <div class="module-number number-pink">02</div>
+          <div>
+            <span class="eyebrow">RECONOCER PARA PROTEGER</span>
+            <h2 id="violenciaTitle">Prevención y violencia</h2>
+            <p>
+              La prevención no es responsabilidad de quien vive la violencia.
+              La protección requiere escucha, respuesta oportuna y entornos
+              seguros.
+            </p>
+          </div>
+        </div>
+
+        <div class="content-grid content-grid-three">
+
+          <article class="content-card">
+            <div class="card-icon icon-pink">🧩</div>
+            <h3>Reconocer señales</h3>
+            <p>
+              Control, amenazas, humillación, presión, aislamiento o difusión
+              de imágenes sin permiso pueden ser señales de violencia.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-icon icon-purple">🗣️</div>
+            <h3>Escuchar sin culpar</h3>
+            <p>
+              Creer, escuchar con calma y evitar preguntas que responsabilicen
+              a la persona son pasos esenciales de una primera respuesta.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-icon icon-teal">🛟</div>
+            <h3>Activar protección</h3>
+            <p>
+              Busca apoyo de una persona adulta de confianza y de los servicios
+              competentes. Ante peligro inmediato, contacta emergencias.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="response-panel">
+
+          <div class="response-copy">
+            <span class="eyebrow">UNA RUTA DE ACOMPAÑAMIENTO</span>
+            <h3>¿Qué hacer cuando alguien cuenta una situación de violencia?</h3>
+            <p>
+              No tienes que investigar ni resolverlo todo por tu cuenta. Tu
+              papel puede ser escuchar, tomar en serio lo que cuenta y conectar
+              con ayuda responsable.
+            </p>
+            <div class="response-reminder">
+              La seguridad y la protección de niñas, niños y adolescentes están primero.
+            </div>
+          </div>
+
+          <div class="stepper" id="responseStepper">
+
+            <div class="stepper-progress">
+              <span class="stepper-progress-fill" id="stepperProgress"></span>
+            </div>
+
+            <div class="stepper-steps" role="group"
+                 aria-label="Pasos de acompañamiento">
+              <button class="step-dot is-active" type="button"
+                      data-step="0" aria-label="Paso 1" aria-current="step">01</button>
+              <button class="step-dot" type="button"
+                      data-step="1" aria-label="Paso 2">02</button>
+              <button class="step-dot" type="button"
+                      data-step="2" aria-label="Paso 3">03</button>
+              <button class="step-dot" type="button"
+                      data-step="3" aria-label="Paso 4">04</button>
+            </div>
+
+            <div class="step-content is-active" data-step-panel="0">
+              <span class="step-kicker">PASO 01</span>
+              <h4>Escucha y cree</h4>
+              <p>
+                Permite que la persona cuente lo que desea compartir. Mantén
+                la calma y evita juzgar, presionar o pedir detalles innecesarios.
+              </p>
+            </div>
+
+            <div class="step-content" data-step-panel="1" hidden>
+              <span class="step-kicker">PASO 02</span>
+              <h4>Prioriza la seguridad</h4>
+              <p>
+                Pregunta qué necesita para sentirse segura o seguro en ese
+                momento. Ante peligro inmediato, aléjense de la situación
+                y contacten emergencias.
+              </p>
+            </div>
+
+            <div class="step-content" data-step-panel="2" hidden>
+              <span class="step-kicker">PASO 03</span>
+              <h4>Conecta con apoyo responsable</h4>
+              <p>
+                Acude a una persona adulta de confianza y a los servicios de
+                protección, salud o educación correspondientes. No prometas
+                guardar secretos cuando hay riesgo.
+              </p>
+            </div>
+
+            <div class="step-content" data-step-panel="3" hidden>
+              <span class="step-kicker">PASO 04</span>
+              <h4>Acompaña sin reemplazar a profesionales</h4>
+              <p>
+                Respeta la autonomía, evita difundir información y facilita
+                el seguimiento con personal capacitado. No confrontes por tu
+                cuenta a la persona señalada.
+              </p>
+            </div>
+
+            <div class="stepper-controls">
+              <button class="button button-small button-muted"
+                      id="stepPrev" type="button" disabled>
+                ← Anterior
+              </button>
+              <button class="button button-small button-dark"
+                      id="stepNext" type="button">
+                Siguiente →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="subsection-heading">
+          <span class="eyebrow">TAMBIÉN EN INTERNET</span>
+          <h3>Violencia de género digital</h3>
+          <p>
+            Los derechos, el consentimiento y el respeto también se aplican
+            en espacios digitales.
+          </p>
+        </div>
+
+        <div class="content-grid content-grid-two digital-grid">
+
+          <article class="content-card">
+            <h3>Cuida tu privacidad</h3>
+            <p>
+              Revisa quién puede ver tus publicaciones, limita la información
+              personal que compartes y utiliza contraseñas únicas. No estás
+              obligada u obligado a enviar imágenes íntimas.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h3>Ante amenazas o difusión sin permiso</h3>
+            <p>
+              No respondas bajo presión. Conserva evidencias sin redistribuir
+              el contenido, bloquea y reporta la cuenta cuando sea seguro,
+              y busca acompañamiento adulto y asesoría de las autoridades
+              competentes.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MÓDULO 03: SALUD MENTAL -->
+    <section class="module module-light section-pad" id="salud-mental"
+             aria-labelledby="mentalTitle">
+
+      <div class="container">
+
+        <div class="module-heading">
+          <div class="module-number number-yellow">03</div>
+          <div>
+            <span class="eyebrow">ESCUCHAR LO QUE SIENTES</span>
+            <h2 id="mentalTitle">Salud mental</h2>
+            <p>
+              La salud mental forma parte del bienestar. No se trata de estar
+              feliz todo el tiempo, sino de contar con recursos y apoyo para
+              afrontar lo que vivimos.
+            </p>
+          </div>
+        </div>
+
+        <div class="mental-intro">
+
+          <div>
+            <span class="mini-label">UNA IDEA IMPORTANTE</span>
+            <h3>Lo que sientes merece ser escuchado.</h3>
+            <p>
+              Los cambios de ánimo, el estrés y la preocupación pueden aparecer
+              en distintas etapas. Cuando el malestar persiste, interfiere con
+              tu vida cotidiana o te hace sentir en riesgo, buscar apoyo
+              profesional es una decisión de cuidado.
+            </p>
+          </div>
+
+          <div class="mental-illustration" aria-hidden="true">
+            <div class="brain-orbit">☁️</div>
+            <span>♡</span>
+            <small>pausa · respira · pide apoyo</small>
+          </div>
+
+        </div>
+
+        <div class="content-grid content-grid-three mental-cards">
+
+          <article class="content-card">
+            <div class="card-icon icon-yellow">🌦️</div>
+            <h3>Reconoce tus emociones</h3>
+            <p>
+              Poner nombre a lo que sientes ayuda a comunicar necesidades y
+              reconocer cuándo necesitas una pausa o acompañamiento.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-icon icon-teal">🌿</div>
+            <h3>Construye hábitos posibles</h3>
+            <p>
+              El descanso, la alimentación, el movimiento, los vínculos seguros
+              y los espacios de disfrute pueden apoyar tu bienestar.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <div class="card-icon icon-purple">🤲</div>
+            <h3>No tienes que hacerlo sola/o</h3>
+            <p>
+              Hablar con una persona de confianza o un profesional puede
+              ayudarte a entender lo que sucede y encontrar opciones.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="mental-support">
+
+          <div>
+            <span class="eyebrow">PEDIR AYUDA ES VALIENTE</span>
+            <h3>¿Cuándo conviene buscar apoyo?</h3>
+            <p>
+              Cuando la tristeza, ansiedad, irritabilidad, dificultades para
+              dormir o cambios en el apetito se mantienen, aumentan o afectan
+              tus estudios, relaciones o actividades. También cuando sientes
+              que no puedes afrontar algo sin ayuda.
+            </p>
+          </div>
+
+          <div class="support-list">
+            <p><span>01</span> Habla con alguien que te escuche y te tome en serio.</p>
+            <p><span>02</span> Acude a un servicio de salud o profesional de salud mental.</p>
+            <p><span>03</span> Si existe peligro inmediato o riesgo de hacerte daño, no permanezcas a solas y contacta emergencias.</p>
+          </div>
+
+        </div>
+
+        <div class="accordion-block">
+
+          <div class="subsection-heading">
+            <span class="eyebrow">HERRAMIENTAS DE ORIENTACIÓN</span>
+            <h3>¿Qué son los instrumentos de tamizaje?</h3>
+            <p>
+              Son herramientas que pueden ayudar a identificar señales y
+              orientar una evaluación. No reemplazan una valoración
+              profesional ni ofrecen un diagnóstico por sí solas.
+            </p>
+          </div>
+
+          <div class="accordion" data-accordion>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                HEADSSS <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Es una entrevista psicosocial estructurada que explora áreas
+                  del contexto adolescente, como hogar, educación, actividades,
+                  consumo, sexualidad, emociones y seguridad. Debe aplicarse
+                  con privacidad, respeto y criterio profesional.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                PHQ-9 <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Es un cuestionario utilizado para identificar y estimar la
+                  intensidad de síntomas depresivos. Un resultado requiere
+                  interpretación clínica y conversación con un profesional,
+                  especialmente ante respuestas relacionadas con autolesión.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" type="button" aria-expanded="false">
+                GAD-7 <span aria-hidden="true">+</span>
+              </button>
+              <div class="accordion-panel">
+                <p>
+                  Es un instrumento breve de detección de síntomas de ansiedad.
+                  No determina por sí solo la existencia de un trastorno y no
+                  sustituye una entrevista clínica.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          Contenido educativo. FuturoLab EC no realiza diagnósticos ni
+          sustituye la atención de profesionales de salud, salud mental,
+          protección o justicia.
         </p>
 
+      </div>
+    </section>
+
+    <!-- MÓDULO 04: ENFOQUE INTEGRAL -->
+    <section class="module module-tint section-pad" id="transversal"
+             aria-labelledby="transversalTitle">
+
+      <div class="container">
+
+        <div class="module-heading">
+          <div class="module-number number-blue">04</div>
+          <div>
+            <span class="eyebrow">MIRAR MÁS ALLÁ DE LO INDIVIDUAL</span>
+            <h2 id="transversalTitle">Enfoque integral</h2>
+            <p>
+              Las decisiones y el bienestar no dependen únicamente de una
+              persona. También influyen las relaciones, las instituciones
+              y las condiciones sociales.
+            </p>
+          </div>
+        </div>
+
+        <div class="socio-layout">
+
+          <div class="socio-visual" role="img"
+               aria-label="Modelo socioecológico: persona, relaciones, comunidad y sociedad">
+
+            <div class="socio-circle socio-outer">
+              <span>Sociedad</span>
+            </div>
+
+            <div class="socio-circle socio-community">
+              <span>Comunidad</span>
+            </div>
+
+            <div class="socio-circle socio-relations">
+              <span>Relaciones</span>
+            </div>
+
+            <div class="socio-circle socio-person">
+              <span>Persona</span>
+            </div>
+
+          </div>
+
+          <div class="socio-copy">
+
+            <span class="mini-label">MODELO SOCIOECOLÓGICO</span>
+            <h3>El entorno también importa.</h3>
+
+            <div class="layer-list">
+
+              <article>
+                <b>01 · Persona</b>
+                <p>Conocimientos, emociones, experiencias, habilidades y autonomía.</p>
+              </article>
+
+              <article>
+                <b>02 · Relaciones</b>
+                <p>Familia, amistades, parejas y personas adultas de confianza.</p>
+              </article>
+
+              <article>
+                <b>03 · Comunidad</b>
+                <p>Escuela, barrio, organizaciones, servicios y redes de apoyo.</p>
+              </article>
+
+              <article>
+                <b>04 · Sociedad</b>
+                <p>Normas, políticas públicas, cultura, desigualdades y acceso a derechos.</p>
+              </article>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection-heading">
+          <span class="eyebrow">PRINCIPIOS QUE ATRAVIESAN TODO</span>
+          <h3>Una mirada integral también significa...</h3>
+        </div>
+
+        <div class="content-grid content-grid-four principle-grid">
+
+          <article class="content-card">
+            <span class="principle-number">A</span>
+            <h3>Interseccionalidad</h3>
+            <p>
+              Comprender cómo distintas condiciones y desigualdades pueden
+              combinarse y afectar las oportunidades.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <span class="principle-number">B</span>
+            <h3>Autonomía progresiva</h3>
+            <p>
+              Reconocer que la capacidad de decidir se desarrolla con la edad,
+              la experiencia y el acompañamiento adecuado.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <span class="principle-number">C</span>
+            <h3>Participación</h3>
+            <p>
+              Escuchar la voz adolescente y abrir espacios reales para opinar
+              e incidir en asuntos que afectan sus vidas.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <span class="principle-number">D</span>
+            <h3>Entornos protectores</h3>
+            <p>
+              Construir espacios seguros, inclusivos y libres de violencia
+              para aprender, convivir y pedir ayuda.
+            </p>
+          </article>
+
+        </div>
+
+        <article class="school-card">
+          <div class="school-symbol">🏫</div>
+          <div>
+            <span class="mini-label">EDUCACIÓN Y CUIDADO</span>
+            <h3>La escuela como escudo protector</h3>
+            <p>
+              Una comunidad educativa protectora escucha, respeta las
+              diferencias, previene la violencia y facilita la permanencia
+              y el aprendizaje. Para ello son importantes los protocolos
+              claros, el acompañamiento psicosocial, la accesibilidad y la
+              coordinación con servicios competentes.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section class="next-lab">
+      <div class="container next-lab-inner">
+        <span class="eyebrow eyebrow-light">PRÓXIMO EXPERIMENTO</span>
+        <h2>
+          La participación juvenil también transforma los servicios y las políticas públicas.
+        </h2>
+        <p>
+          FuturoLab EC continuará explorando cómo las voces adolescentes
+          pueden identificar barreras, proponer soluciones y fortalecer
+          los espacios que hacen posible el cuidado.
+        </p>
+        <a class="text-link" href="#recursos">
+          Conoce dónde buscar apoyo <span>↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- RECURSOS DE AYUDA -->
+    <section class="resources-section section-pad" id="recursos"
+             aria-labelledby="resourcesTitle">
+
+      <div class="container">
+
+        <div class="resources-heading">
+          <div>
+            <span class="eyebrow eyebrow-light">NO ESTÁS SOLA/O</span>
+            <h2 id="resourcesTitle">
+              Si necesitas hablar con alguien, no tienes que hacerlo a solas.
+            </h2>
+          </div>
+          <p>
+            Pedir ayuda no es un paso atrás en tu proyecto de vida: es parte
+            de él. Mereces ser escuchada/o con respeto y sin juicios.
+          </p>
+        </div>
 
         <div class="resource-grid">
 
-
-          <article class="resource-card">
-
-            <span class="resource-country">
-              Ecuador
-            </span>
-
-            <span class="resource-line">
-              ECU 911
-            </span>
-
+          <article class="resource-card resource-emergency">
+            <span class="resource-country">ECUADOR · EMERGENCIAS</span>
+            <div class="resource-icon">🚨</div>
+            <h3>ECU 911</h3>
             <p>
-              Emergencias y situaciones de peligro inmediato.
+              Para situaciones de peligro inmediato o emergencias que
+              requieren respuesta urgente.
             </p>
-
             <a href="https://www.ecu911.gob.ec/"
-              target="_blank"
-              rel="noopener noreferrer">
-              Sitio oficial del ECU 911 →
+               target="_blank" rel="noopener noreferrer">
+              Sitio oficial del ECU 911 ↗
             </a>
-
           </article>
 
-
           <article class="resource-card">
-
-            <span class="resource-country">
-              Ecuador
-            </span>
-
-            <span class="resource-line">
-              Ministerio de Salud Pública
-            </span>
-
+            <span class="resource-country">ECUADOR · SALUD</span>
+            <div class="resource-icon">＋</div>
+            <h3>Ministerio de Salud Pública</h3>
             <p>
-              Consulta los servicios de salud mental
-              y atención disponibles.
+              Consulta información oficial sobre servicios de salud
+              y atención en salud mental.
             </p>
-
             <a href="https://www.salud.gob.ec/"
-              target="_blank"
-              rel="noopener noreferrer">
-              Sitio oficial del MSP →
+               target="_blank" rel="noopener noreferrer">
+              Sitio oficial del MSP ↗
             </a>
-
           </article>
 
+          <article class="resource-card">
+            <span class="resource-country">ECUADOR · EDUCACIÓN</span>
+            <div class="resource-icon">📚</div>
+            <h3>Ministerio de Educación</h3>
+            <p>
+              Consulta los recursos y rutas institucionales de acompañamiento
+              y protección en el ámbito educativo.
+            </p>
+            <a href="https://educacion.gob.ec/"
+               target="_blank" rel="noopener noreferrer">
+              Sitio oficial del Ministerio ↗
+            </a>
+          </article>
 
           <article class="resource-card">
-
-            <span class="resource-country">
-              Ecuador
-            </span>
-
-            <span class="resource-line">
-              ECU 911 y servicios de protección
-            </span>
-
+            <span class="resource-country">ECUADOR · DERECHOS</span>
+            <div class="resource-icon">⚖️</div>
+            <h3>Fiscalía General del Estado</h3>
             <p>
-              Si existe violencia o peligro, busca
-              acompañamiento y activa los mecanismos
-              de protección correspondientes.
+              Información institucional sobre denuncias, servicios
+              y atención a víctimas.
             </p>
-
             <a href="https://www.fiscalia.gob.ec/"
-              target="_blank"
-              rel="noopener noreferrer">
-              Fiscalía General del Estado →
+               target="_blank" rel="noopener noreferrer">
+              Sitio oficial de Fiscalía ↗
             </a>
-
           </article>
-
-
-          <article class="resource-card">
-
-            <span class="resource-country">
-              Cualquier lugar
-            </span>
-
-            <span class="resource-line">
-              Una persona de confianza
-            </span>
-
-            <p>
-              Un familiar, docente, orientador o
-              profesional de salud puede ayudarte
-              a encontrar el apoyo adecuado.
-            </p>
-
-          </article>
-
 
         </div>
 
-
-        <p class="resources-note">
-          FuturoLab EC es una plataforma educativa.
-          No ofrece atención de emergencia ni reemplaza
-          los servicios profesionales de salud, salud
-          mental o protección.
-
-          Verifica la vigencia, disponibilidad y condiciones
-          de los servicios antes de utilizarlos.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==================================================
-         REFERENCIAS Y TRANSPARENCIA
-    =================================================== -->
-
-    <section class="pillar" id="referencias">
-
-      <div class="pillar-head">
-
-        <span class="pillar-num">05</span>
-
-        <div>
-          <h2>Conocimiento con evidencia</h2>
-
-          <p class="pillar-sub">
-            La información responsable comienza con
-            fuentes confiables y verificables.
+        <div class="resource-bottom">
+          <span class="resource-heart">♡</span>
+          <p>
+            Si eres menor de edad y necesitas ayuda, busca también a una
+            persona adulta de confianza. Si estás en peligro inmediato,
+            llama al ECU 911 o acude a un servicio de emergencia.
           </p>
         </div>
 
-      </div>
-
-
-      <div class="pillar-body">
-
-        <div class="two-col">
-
-          <article class="card-soft">
-
-            <h3>Organismos de referencia</h3>
-
-            <ul class="check-list">
-
-              <li>
-                <a href="https://www.who.int/"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Organización Mundial de la Salud (OMS)
-                </a>
-              </li>
-
-              <li>
-                <a href="https://www.unicef.org/"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  UNICEF
-                </a>
-              </li>
-
-              <li>
-                <a href="https://www.unfpa.org/"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Fondo de Población de las Naciones Unidas
-                </a>
-              </li>
-
-              <li>
-                <a href="https://www.unesco.org/"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  UNESCO
-                </a>
-              </li>
-
-              <li>
-                <a href="https://www.salud.gob.ec/"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  Ministerio de Salud Pública del Ecuador
-                </a>
-              </li>
-
-            </ul>
-
-          </article>
-
-
-          <article class="card-soft">
-
-            <h3>Nuestro compromiso editorial</h3>
-
-            <p>
-              Los contenidos de FuturoLab EC deben
-              distinguir evidencia científica, datos
-              estadísticos, interpretaciones y opiniones.
-            </p>
-
-            <p>
-              Cada cifra debe contar con autor o institución,
-              año, población estudiada y enlace a su
-              documento original.
-            </p>
-
-            <p>
-              La información se debe actualizar cuando
-              cambien las investigaciones, las políticas
-              públicas o los servicios disponibles.
-            </p>
-
-          </article>
-
-        </div>
+        <p class="resource-disclaimer">
+          Los enlaces llevan a sitios institucionales. La disponibilidad y
+          los procedimientos pueden variar; verifica la información
+          directamente con cada entidad. Este sitio no es un servicio de
+          emergencia ni recibe denuncias.
+        </p>
 
       </div>
-
     </section>
-
 
   </main>
 
-
-  <!-- ==================================================
-       PIE DE PÁGINA
-  =================================================== -->
-
+  <!-- FOOTER -->
   <footer class="site-footer">
+    <div class="container footer-inner">
 
-    <div>
-
-      <a href="#inicio" class="brand footer-brand">
-        <span class="brand-text">
-          Futuro<em>Lab</em> EC
-        </span>
+      <a class="brand footer-brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span class="brand-text">Futuro<span>Lab</span> EC</span>
       </a>
 
       <p>
-        Una tribu sin tabú.
-        Un espacio para aprender, cuestionar,
-        participar y construir futuro.
+        Una tribu sin tabú. Información para decidir, herramientas para cuidarnos.
       </p>
 
-      <p>
-        Contenido educativo sobre ESI,
-        prevención de violencias, derechos
-        y salud mental adolescente.
-      </p>
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        <a href="#esi">ESI</a>
+        <a href="#violencia">Prevención</a>
+        <a href="#salud-mental">Salud mental</a>
+        <a href="#recursos">Ayuda</a>
+      </nav>
+
+      <small>
+        © <span id="currentYear">2026</span> FuturoLab EC · Contenido educativo.
+      </small>
 
     </div>
-
-
-    <div class="footer-links">
-
-      <a href="#esi">ESI</a>
-      <a href="#violencia">Prevención</a>
-      <a href="#salud-mental">Salud mental</a>
-      <a href="#transversal">Enfoque integral</a>
-      <a href="#recursos">Ayuda</a>
-      <a href="#referencias">Referencias</a>
-
-    </div>
-
-
-    <p class="footer-copy">
-      © <span id="currentYear">2026</span>
-      FuturoLab EC. Todos los derechos reservados.
-    </p>
-
-
-    <button
-      id="backToTop"
-      class="back-to-top"
-      type="button"
-      aria-label="Volver al inicio">
-
-      ↑ Volver arriba
-
-    </button>
-
   </footer>
 
+  <button class="back-to-top" id="backToTop"
+          type="button" aria-label="Volver al inicio">↑</button>
 
-  <!-- ==================================================
-       JAVASCRIPT PRINCIPAL
-       Sin React, MongoDB ni backend.
-  =================================================== -->
-
-  <script src="script.js" defer></script>
-
-</body>
-</html>
-<script src="script.js" defer></script>
 </body>
 </html>
